@@ -2,7 +2,7 @@
 
 [[**Documentation**]](https://arcruz0.github.io/extra/rlazycartesian/)
 
-An R interface for Lazy Cartesian Products. Provides memory-efficient ways to obtain elements (including random samples) from Cartesian Products. Partial wrapper of the [`lazy-cartesian-product`](https://github.com/tylerburdsall/lazy-cartesian-product) C++ library.
+An R interface for Lazy Cartesian Products. Provides memory-efficient ways to obtain elements (including random samples) from Cartesian Products. Partial wrapper of the [`lazy-cartesian-product`](https://github.com/tylerburdsall/lazy-cartesian-product) C++ library (Burdsall, 2018).
 
 ## Installation
 
@@ -66,3 +66,7 @@ peakRAM::peakRAM(
 #> 1                0.9               6.8
 #> 2             1430.6            1907.4
 ```
+
+## References
+
+Burdsall, T. (2018). `lazy-cartesian-product`: .hpp library to efficiently generate combinations using the Lazy Cartesian Product algorithm. <https://github.com/tylerburdsall/lazy-cartesian-product>
