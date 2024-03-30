@@ -13,7 +13,7 @@ remotes::install_github("arcruz0/rlazycartesian")
 
 ## Example
 
-Suppose you need a random sample of 1,000 elements from a Cartesian Product of 125M elements. `rlazycartesian` can do this without generating all elements in advance (as `expand.grid()` would do), which is fast and consumes very little RAM---see [Benchmarks](#benchmarks) below.
+Suppose you need a random sample of 1,000 elements from a Cartesian Product of 125M elements. `rlazycartesian` can do this without generating all elements in advance (as `expand.grid()` would do). This makes it so that the operation is fast and consumes very little RAM---see [Benchmarks](#benchmarks) below.
 
 ``` r
 l <- list(x = paste0("x", 1:500, sep = ""),
