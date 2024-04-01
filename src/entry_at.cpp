@@ -24,11 +24,14 @@ List entry_at (List input_list, std::vector<int> at)
   // Compute entry_at using `lazy-cartesian-product` //
   // set n
   R_xlen_t n_at = at.size();
+  // initialize empty results_at vector
   std::vector<vector<string>> results_at(n_at);
+  // fill vector with values from `lazy-cartesian-product`'s entry_at() function
   for(R_xlen_t i = 0; i < n_at; ++i) {
-    std::vector<string> results_at_i = lazy_cartesian_product::entry_at(possibilities, at[i] - 1);
+    std::vector<string> results_at_i = lazy_cartesian_product::entry_at(possibilities, at[i] - 1); // note change to C++'s 0-index
     results_at.at(i) = results_at_i;
   }
-  
+
+  // Return std::vector<string>  as list
   return Rcpp::wrap(results_at);
 }
