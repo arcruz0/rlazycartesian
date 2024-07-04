@@ -14,10 +14,13 @@
 #'   go from 1 to n_ur).
 #' 
 #' @examples
-#' l <- list(color = c("Red", "Blue", "Yellow"),
-#'           shape = c("Square", "Circle"))
-#'
-#' get_random_sample(l, 3L)
+#' l <- list(color  = c("Red", "Blue", "Yellow"),
+#'           shape  = c("Square", "Circle"),
+#'           number = 1:3)
+#'           
+#' lc <- lazy_cartesian(l)
+#' 
+#' get_random_sample(lc, 3L)
 #'
 #' @references 
 #' Burdsall, T. (2018). `lazy-cartesian-product`: .hpp library to efficiently

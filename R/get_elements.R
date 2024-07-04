@@ -20,7 +20,7 @@
 #' )
 #'
 #' lc <- lazy_cartesian(l, r)
-#' get_elements(lc, c(1, 3))
+#' get_elements(lc, c(2, 8))
 #'
 #' @references 
 #' Burdsall, T. (2018). `lazy-cartesian-product`: .hpp library to efficiently

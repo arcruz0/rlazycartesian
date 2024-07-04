@@ -25,10 +25,13 @@ This function lazily retrieves a random sample from a Cartesian product,
 respecting restrictions.
 }
 \examples{
-l <- list(color = c("Red", "Blue", "Yellow"),
-          shape = c("Square", "Circle"))
+l <- list(color  = c("Red", "Blue", "Yellow"),
+          shape  = c("Square", "Circle"),
+          number = 1:3)
+          
+lc <- lazy_cartesian(l)
 
-get_random_sample(l, 3L)
+get_random_sample(lc, 3L)
 
 }
 \references{

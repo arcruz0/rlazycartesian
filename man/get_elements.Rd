@@ -31,7 +31,7 @@ r <- list(
 )
 
 lc <- lazy_cartesian(l, r)
-get_elements(lc, c(1, 3))
+get_elements(lc, c(2, 8))
 
 }
 \references{

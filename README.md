@@ -1,6 +1,6 @@
 # `rlazycartesian`
 
-[[**Documentation**]](https://arcruz0.github.io/extra/rlazycartesian/)
+v0.2 | [[**Documentation**]](https://arcruz0.github.io/extra/rlazycartesian/)
 
 An R interface for Lazy Cartesian Products. Provides memory-efficient ways to obtain elements (including random samples) from Cartesian Products. Partial wrapper of the [`lazy-cartesian-product`](https://github.com/tylerburdsall/lazy-cartesian-product) C++ library (Burdsall, 2018).
 
