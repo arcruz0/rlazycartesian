@@ -1,3 +1,4 @@
 useDynLib(rlazycartesian, .registration=TRUE)
 importFrom(Rcpp, evalCpp)
-exportPattern("^[[:alpha:]]+")
+export(get_elements, get_random_sample, get_size, lazy_cartesian)
+S3method(print, lazy_cartesian)

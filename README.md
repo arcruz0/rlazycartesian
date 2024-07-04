@@ -16,12 +16,20 @@ remotes::install_github("arcruz0/rlazycartesian")
 Suppose you need a random sample of 1,000 elements from a Cartesian Product of 125M elements. `rlazycartesian` can do this without generating all elements in advance (as `expand.grid()` would do). This makes it so that the operation is fast and consumes very little RAM---see [Benchmarks](#benchmarks) below.
 
 ``` r
+library(rlazycartesian)
+
 l <- list(x = paste0("x", 1:500, sep = ""),
           y = paste0("y", 1:500, sep = ""),
           z = paste0("z", 1:500, sep = ""))
 
+lc <- lazy_cartesian(l)
+lc
+#> `lazy_cartesian` object with 1.25e+08 elements
+```
+
+``` r
 set.seed(1)
-head(rlazycartesian::get_random_sample(l, 1000))
+head(get_random_sample(lc, 1000))
 #>   .element    x    y    z
 #> 1 66608964 x267 y218 z464
 #> 2 44492929 x178 y486 z429
@@ -36,7 +44,7 @@ head(rlazycartesian::get_random_sample(l, 1000))
 Element indices from `rlazycartesian` are equivalent to indices from a sorted `expand.grid()`:
 
 ``` r
-rlazycartesian::get_elements(l, c(12345, 98765))
+get_elements(lc, c(12345, 98765))
 #>   .element  x    y    z
 #> 1    12345 x1  y25 z345
 #> 2    98765 x1 y198 z265
@@ -56,15 +64,50 @@ For the random sample example above, compare performance (`Elapsed_Time_sec`) an
 
 ``` r
 peakRAM::peakRAM(
-  rlazycartesian::get_random_sample(l, 1000),
+  {lc <- lazy_cartesian(l); get_random_sample(lc, 1000)},
   {eg <- expand.grid(l); eg[sample(1:nrow(eg), 1000),]}
 )
-#>                                      Function_Call Elapsed_Time_sec
-#> 1        rlazycartesian::get_random_sample(l,1000)            0.095
-#> 2 {eg<-expand.grid(l)eg[sample(1:nrow(eg),1000),]}            4.538
+#>                                       Function_Call Elapsed_Time_sec
+#> 1 {lc<-lazy_cartesian(l)get_random_sample(lc,1000)}            0.002
+#> 2  {eg<-expand.grid(l)eg[sample(1:nrow(eg),1000),]}            4.332
 #>   Total_RAM_Used_MiB Peak_RAM_Used_MiB
-#> 1                0.9               6.8
-#> 2             1430.6            1907.4
+#> 1                  0               0.2
+#> 2                  0            2862.1
+```
+
+## Restrictions to the Cartesian product
+
+Starting in v0.2, `rlazycartesian` supports simple restrictions to the Cartesian product. For example, suppose that in the following Cartesian product we want to exclude any elements with "Red" and "Circle," as well as any elements with "Square" and the numbers 1 or 3:
+
+``` r
+l <- list(color  = c("Red", "Blue", "Yellow"),
+          shape  = c("Square", "Circle"),
+          number = 1:3)
+
+r <- list(
+  restriction1 = list(color = "Red", shape = "Circle"),
+  restriction2 = list(shape = "Square", number = c(1, 3))
+)
+
+lc <- lazy_cartesian(l, restrictions = r)
+lc
+#> `lazy_cartesian` object with 9 elements (after restrictions)
+#>   => 2 restrictions excluded 50% of the Cartesian Product 
+#>      (which originally had 18 elements)
+```
+
+``` r
+get_random_sample(lc, 9) # (note element indices still go up to 18)
+#>   .element  color  shape number
+#> 1       17 Yellow Circle      2
+#> 2       16 Yellow Circle      1
+#> 3        8   Blue Square      2
+#> 4       18 Yellow Circle      3
+#> 5       10   Blue Circle      1
+#> 6       12   Blue Circle      3
+#> 7       14 Yellow Square      2
+#> 8       11   Blue Circle      2
+#> 9        2    Red Square      2
 ```
 
 ## References

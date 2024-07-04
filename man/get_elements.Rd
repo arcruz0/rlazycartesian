@@ -4,10 +4,10 @@
 \alias{get_elements}
 \title{Lazily retrieve elements from a Cartesian product}
 \usage{
-get_elements(l, indices, index_colname = ".element")
+get_elements(lc, indices, index_colname = ".element")
 }
 \arguments{
-\item{l}{A named list with the combinations of the Cartesian product.}
+\item{lc}{A \code{lazy_cartesian} object, created with \code{rlazycartesian::lazy_cartesian()}.}
 
 \item{indices}{A numeric vector with indices of the elements to retrieve.}
 
@@ -21,10 +21,17 @@ A data frame in which each row is an element from the Cartesian product.
 This function lazily retrieves elements from a Cartesian product, given a vector of indices.
 }
 \examples{
-l <- list(color = c("Red", "Blue", "Yellow"),
-          shape = c("Square", "Circle"))
+l <- list(color  = c("Red", "Blue", "Yellow"),
+          shape  = c("Square", "Circle"),
+          number = 1:3)
 
-get_elements(l, c(2, 4))
+r <- list(
+  restriction1 = list(color = "Red", shape = "Circle"),
+  restriction2 = list(shape = "Square", number = c(1, 3))
+)
+
+lc <- lazy_cartesian(l, r)
+get_elements(lc, c(1, 3))
 
 }
 \references{

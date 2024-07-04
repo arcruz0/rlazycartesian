@@ -1,8 +1,8 @@
 Package: rlazycartesian
 Type: Package
 Title: R Interface for Lazy Cartesian Products
-Version: 0.1
-Date: 2024-03-30
+Version: 0.2
+Date: 2024-07-04
 Author: Andrés Cruz
 Maintainer: Andrés Cruz <andres.cruz@utexas.edu>
 Description: Functions to lazily obtain elements from cartesian
@@ -13,6 +13,6 @@ License: MIT
 Encoding: UTF-8
 Imports: Rcpp (>= 1.0.12)
 LinkingTo: Rcpp
-RoxygenNote: 7.3.1
+RoxygenNote: 7.3.2
 URL: https://github.com/arcruz0/rlazycartesian
 BugReports: https://github.com/arcruz0/rlazycartesian/issues

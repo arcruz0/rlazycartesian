@@ -4,27 +4,31 @@
 \alias{get_random_sample}
 \title{Lazily get random sample from a Cartesian product}
 \usage{
-get_random_sample(l, n_sample, index_colname = ".element")
+get_random_sample(lc, n_sample, index_colname = ".element")
 }
 \arguments{
-\item{l}{A named list with the combinations of the Cartesian product.}
+\item{lc}{A \code{lazy_cartesian} object, created with \code{rlazycartesian::lazy_cartesian()}.}
 
-\item{n_sample}{A number with the number of elements to be sampled.}
+\item{n_sample}{An integer with the number of elements to be sampled.}
 
 \item{index_colname}{A string with the column name for the indices in the output
 data frame. By default, ".element".}
 }
 \value{
-A data frame in which each row is an element from the Cartesian product.
+A data frame in which each row is an element from the
+(potentially restricted) Cartesian product. Indices are in the first
+column and correspond to the unrestricted Cartesian product (i.e., they
+go from 1 to n_ur).
 }
 \description{
-This function lazily retrieves a random sample from a Cartesian product
+This function lazily retrieves a random sample from a Cartesian product,
+respecting restrictions.
 }
 \examples{
 l <- list(color = c("Red", "Blue", "Yellow"),
           shape = c("Square", "Circle"))
 
-get_random_sample(l, 3)
+get_random_sample(l, 3L)
 
 }
 \references{
