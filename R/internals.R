@@ -14,7 +14,16 @@ restrict <- function(l, restriction, v_each){
   for (i in seq_along(restriction)) {
     var_name <- names(restriction)[i]
     var_value <- restriction[[i]]
-    var_value_position <- which(l[[var_name]] %in% var_value)
+    
+    if (!any(grepl("\\|", l[[var_name]]))){
+      var_value_position <- which(l[[var_name]] %in% var_value)
+    } else {
+      var_value_position <- which(
+        grepl(paste("\\|", var_value, sep = ""), l[[var_name]]) |
+          grepl(paste(var_value, "\\|", sep = ""), l[[var_name]])
+      )
+    }
+    
     n_var_values <- length(l[[var_name]])
     l_predicates[[i]] <- rep(
       seq_len(n_var_values), 
