@@ -28,7 +28,7 @@ restrict <- function(l, restriction, v_each){
     l_predicates[[i]] <- rep(
       seq_len(n_var_values), 
       each = v_each[var_name], 
-      length.out = rlazycartesian::get_size(l)
+      length.out = prod(lengths((l)))
     ) %in% var_value_position
   }
   

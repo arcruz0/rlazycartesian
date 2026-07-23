@@ -4,10 +4,10 @@
 \alias{get_size}
 \title{Lazily get the total number of elements in a Cartesian product}
 \usage{
-get_size(l)
+get_size(lc)
 }
 \arguments{
-\item{l}{A named list with the combinations of the Cartesian product.}
+\item{lc}{A `lazy_cartesian` object.}
 }
 \value{
 A number.
@@ -16,9 +16,19 @@ A number.
 This function lazily retrieves the total number of elements in a Cartesian product
 }
 \examples{
-l <- list(color = c("Red", "Blue", "Yellow"),
-          shape = c("Square", "Circle"))
+l <- list(color  = c("Red", "Blue", "Yellow"),
+          shape  = c("Square", "Circle"),
+          number = 1:3)
 
-get_size(l)
+r <- list(
+  restriction1 = list(color = "Red", shape = "Circle"),
+  restriction2 = list(shape = "Square", number = c(1, 3))
+)
+
+lc_without_restrictions <- lazy_cartesian(l)
+get_size(lc_without_restrictions)
+
+lc_with_restrictions <- lazy_cartesian(l, r)
+get_size(lc_with_restrictions)
 
 }
